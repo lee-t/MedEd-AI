@@ -44,46 +44,46 @@ def main():
         print(f"Reading {docs}", file=sys.stderr)
         documents.extend(docs)
 
-        #NODE PARSING AND INDEXING#
+    #NODE PARSING AND INDEXING#
 
-        # create the sentence window node parser w/ default settings
-        print("Sentence Node Parsing", file=sys.stderr)
-        sentence_node_parser = SentenceWindowNodeParser.from_defaults(
-            window_size=3,
-            window_metadata_key="window",
-            original_text_metadata_key="original_text"
-        )
+    # create the sentence window node parser w/ default settings
+    print("Sentence Node Parsing", file=sys.stderr)
+    sentence_node_parser = SentenceWindowNodeParser.from_defaults(
+        window_size=3,
+        window_metadata_key="window",
+        original_text_metadata_key="original_text"
+    )
 
-        #define the llm as AzureOpenAI, not OpenAI - CRITICAL
-        print("Defining LLM to AzureOpenAI", file=sys.stderr)
-        llm = AzureOpenAI(
-            model="gpt-35-turbo-16k",
-            deployment_name="GPT-35-16K",
-            api_key=api_key,
-            azure_endpoint=azure_endpoint,
-            api_version=api_version,
-        )
+    #define the llm as AzureOpenAI, not OpenAI - CRITICAL
+    print("Defining LLM to AzureOpenAI", file=sys.stderr)
+    llm = AzureOpenAI(
+        model="gpt-35-turbo-16k",
+        deployment_name="GPT-35-16K",
+        api_key=api_key,
+        azure_endpoint=azure_endpoint,
+        api_version=api_version,
+    )
 
-        #create vector index  
-        print("Defining Embed Model to AzureOpenAIEmbedding", file=sys.stderr)                                         
-        embed_model_azure = AzureOpenAIEmbedding(
-            model="text-embedding-3-large",
-            deployment_name="text-embed-3L-rsg",
-            api_key=api_key,
-            azure_endpoint=azure_endpoint,
-            api_version=api_version,
-        )
+    #create vector index  
+    print("Defining Embed Model to AzureOpenAIEmbedding", file=sys.stderr)                                         
+    embed_model_azure = AzureOpenAIEmbedding(
+        model="text-embedding-3-large",
+        deployment_name="text-embed-3L-rsg",
+        api_key=api_key,
+        azure_endpoint=azure_endpoint,
+        api_version=api_version,
+    )
 
-        Settings.llm = llm
-        Settings.embed_model = embed_model_azure
+    Settings.llm = llm
+    Settings.embed_model = embed_model_azure
 
-        print("Defining Callback Manager", file=sys.stderr)
-        callback_manager = CallbackManager()
-        
-        print("Starting Vector Store Index", file=sys.stderr)
-        sentence_index = VectorStoreIndex.from_documents(
-        docs, embed_model=embed_model_azure, callback_manager=callback_manager
-        )
+    print("Defining Callback Manager", file=sys.stderr)
+    callback_manager = CallbackManager()
+    
+    print("Starting Vector Store Index", file=sys.stderr)
+    sentence_index = VectorStoreIndex.from_documents(
+    docs, embed_model=embed_model_azure, callback_manager=callback_manager
+    )
 
     print("Saving to Persistent Storage", file=sys.stderr)
     ##save to persistent storage
