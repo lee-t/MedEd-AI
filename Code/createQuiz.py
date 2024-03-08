@@ -82,7 +82,7 @@ def main():
     
     print("Starting Vector Store Index", file=sys.stderr)
     sentence_index = VectorStoreIndex.from_documents(
-    docs, embed_model=embed_model_azure, callback_manager=callback_manager
+    documents, embed_model=embed_model_azure, callback_manager=callback_manager
     )
 
     print("Saving to Persistent Storage", file=sys.stderr)
