@@ -124,8 +124,8 @@ class Form:
                 batchUpdate(formId=self.form_id,
                             body={'requests': self.requests}).execute()
 
-    def get_link_to_form(self):
-        return "https://docs.google.com/forms/d/{}".format(self.form_id)
+    def get_link_to_form(form_id):
+        return "https://docs.google.com/forms/d/{}".format(form_id)
 
     
     def create_quiz(self, sentence_response):
@@ -143,6 +143,9 @@ class Form:
                             choices=question['options'])
 
         self.request_updates(self.form_id)
+        
+        link=self.get_link_to_form(self.form_id)
+        print(link)
 
     # def get_form_responses(self, form_id):
         
