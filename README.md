@@ -1,5 +1,6 @@
 # MedEd AI
 Create a RAG model using course content to generate a Google Forms quiz.
+[Workflow in Excalidraw](https://excalidraw.com/#json=NpMYP2oIVYDmULCbdSe73,nX54wTxBQ98v32NCTNw9cg)
 
 ## 🚀 Getting Started
 For getting started using this project, you will need:

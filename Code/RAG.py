@@ -51,7 +51,6 @@ class RAG:
         llm_model_name = "gpt-35-turbo-16k"
         api_type = "azure"
 
-#TODO set to self.llm and self.embed model when you're done
         Settings.llm = llm
         Settings.embed_model = embed_model  
 

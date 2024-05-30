@@ -124,7 +124,7 @@ class Form:
                 batchUpdate(formId=self.form_id,
                             body={'requests': self.requests}).execute()
 
-    def get_link_to_form(form_id):
+    def get_link_to_form(self, form_id):
         return "https://docs.google.com/forms/d/{}".format(form_id)
 
     
@@ -146,8 +146,3 @@ class Form:
         
         link=self.get_link_to_form(self.form_id)
         print(link)
-
-    # def get_form_responses(self, form_id):
-        
-    #     result = self.form_service.forms().responses().list(formId=form_id).execute()
-    #     return result
