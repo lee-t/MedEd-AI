@@ -1,24 +1,38 @@
-FROM python:3.11.4
+FROM chromadb/chroma
 
 # Set the working directory in the container
 WORKDIR /usr/src/app
 
 RUN mkdir /Code
+RUN mkdir /Data/studentfiles
 RUN mkdir /Credentials
+
 # Copy the current directory contents into the container at /usr/src/app
 COPY ./Code /Code
 COPY ./Credentials /Credentials
+COPY /Data/meded_ai_dev.duckdb /usr/src/app/Code/
+COPY /Data /usr/src/app/Data
+COPY /Code/requirements.txt /usr/src/app/
 
 ENV PYTHONUNBUFFERED=1
 
 RUN python3 -m pip install --upgrade pip
 
-COPY /Code/requirements.txt /usr/src/app/
-RUN --mount=type=cache,target=/root/.cache/pip pip install -r /Code/requirements.txt
+RUN apt-get update --fix-missing && apt-get install -y --fix-missing \
+    build-essential \
+    gcc \
+    g++ \
+    musl-dev \
+    python3-dev \
+    docker-compose \
+    cmake \
+    libffi-dev \
+    autoconf && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir /install
 
-# Install any needed packages specified in requirements.txt
-# RUN python3 -m pip install -r /Code/requirements.txt
-# RUN python3 -m pip install --upgrade google-api-python-client oauth2client
+RUN python3 -m pip install -r /Code/requirements.txt
 
-# Run main.py when the container launches
-CMD ["python3", "/Code/createQuiz.py"]
+EXPOSE 8787
+
+ENTRYPOINT ["jupyter-lab", "/Code/autovectorRAG.ipynb", "--ip", "0.0.0.0","--port", "8787", "--allow-root"]
