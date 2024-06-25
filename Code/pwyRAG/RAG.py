@@ -236,6 +236,8 @@ class engines:
         vector_index = VectorStoreIndex(
             nodes, embed_model=embed_model, llm=llm
         )
+
+        vector_index.storage_context.persist(persist_dir="")
         
         vector_store_info = VectorStoreInfo(
         content_info="Student guides to help prepare for consolidation assessments",
