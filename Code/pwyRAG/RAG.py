@@ -233,11 +233,13 @@ class engines:
 
         nodes = parser.get_nodes_from_documents(documents)
 
-        vector_index = VectorStoreIndex(
-            nodes, embed_model=embed_model, llm=llm
-        )
+        vector_store = DuckDBVectorStore(nodes=nodes)
 
-        vector_index.storage_context.persist(persist_dir="")
+        storage_context = StorageContext.from_defaults(vector_store=vector_store)
+
+        vector_index = VectorStoreIndex.from_documents(
+            documents, storage_context=storage_context, embed_model=embed_model, llm=llm
+        )
         
         vector_store_info = VectorStoreInfo(
         content_info="Student guides to help prepare for consolidation assessments",
