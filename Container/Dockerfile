@@ -17,7 +17,7 @@ COPY ../Credentials /usr/src/app/Credentials
 COPY ../Data/meded_ai_dev.duckdb /usr/src/app/Data/
 COPY ../Data /usr/src/app/Data
 
-RUN python3 -m pip install -r /usr/src/app/Code/requirements.txt
+RUN python3 -m pip install -r /usr/src/app/Container/requirements.txt
 
 RUN python3 -m pip install --upgrade duckdb docx2txt
 
