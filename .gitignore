@@ -1,4 +1,6 @@
+/.Rproj.user/
+*.Rproj
+.Rhistory
+.DS_Store
 Credentials/
 Data/
-.DS_Store
-.Rproj.user
