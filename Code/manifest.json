@@ -15,7 +15,7 @@
   },
   "files": {
     "requirements.txt": {
-      "checksum": "f9f47020021cfee8d6e6c517a2583719"
+      "checksum": "082d387dfed7dff3adf743dabc6617fc"
     },
     "LICENSE": {
       "checksum": "f1aed6530487b6e2c382496648062bc5"
@@ -24,7 +24,7 @@
       "checksum": "efb43803f1aaa5be9e2f66322e326a89"
     },
     "app.py": {
-      "checksum": "0f6c679e90ad4f2d050cf429ffae25ac"
+      "checksum": "9ef7941dc458932ff7748366a2cfdfe1"
     },
     "helpers.py": {
       "checksum": "201d10119ebd9ffa32ce42f9f6c83d56"
